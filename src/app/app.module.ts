@@ -11,6 +11,8 @@ import { Graph1Component } from './pages/graph1/graph1.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
+import { PagesComponent } from './pages/pages.component';
+import { RegisterComponent } from './login/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component
     Graph1Component,
     HeaderComponent,
     SidebarComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    PagesComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
