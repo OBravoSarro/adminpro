@@ -1,3 +1,12 @@
-<p>
-  graph1 works!
-</p>
+<div class="row">
+
+	<div class="col-6" *ngFor="let graph of graphs; let i = index">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">{{graph.legend}}</h4>
+				<app-graph-dona [data]="graph.data" [labels]="graph.labels" [type]="graph.type"></app-graph-dona>
+			</div>
+		</div>
+	</div>
+
+</div>
