@@ -4,19 +4,22 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
 	declarations: [
 		NopagefoundComponent,
 		HeaderComponent,
 		SidebarComponent,
-		BreadcrumbsComponent
+		BreadcrumbsComponent,
+		FooterComponent
 	],
 	exports: [
 		NopagefoundComponent,
 		HeaderComponent,
 		SidebarComponent,
-		BreadcrumbsComponent
+		BreadcrumbsComponent,
+		FooterComponent
 	]
 })
 export class SharedModule { }
