@@ -1,0 +1,19 @@
+<h3>{{title}}</h3>
+
+<div class="input-group">
+
+	<div class="input-group-btn" id="button-addon4">
+		<button class="btn btn-secondary" type="button" (click)="changePercent(0)">
+			<i class="mdi mdi-minus"></i>
+		</button>
+	</div>
+
+	<input type="number" class="form-control" #progressInput [(ngModel)]="progress" (ngModelChange)="changePercent(3, $event)" min="0" max="100">
+
+	<div class="input-group-btn" id="button-addon4">
+		<button class="btn btn-secondary" type="button" (click)="changePercent(1)">
+			<i class="mdi mdi-plus"></i>
+		</button>
+
+	</div>
+</div>
