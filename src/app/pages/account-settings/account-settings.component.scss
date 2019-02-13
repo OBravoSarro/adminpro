@@ -1,0 +1,7 @@
+ul#themecolors{
+    padding-left: 0px;
+    & > li{
+        &:first-child{ display: initial; }
+        & > a { cursor: pointer; }
+    }
+}

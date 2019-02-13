@@ -16,6 +16,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { IncreaserComponent } from '../components/increaser/increaser.component';
 import { GraphDonaComponent } from '../components/graph-dona/graph-dona.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,8 @@ import { GraphDonaComponent } from '../components/graph-dona/graph-dona.componen
 		ProgressComponent,
 		Graph1Component,
 		IncreaserComponent,
-		GraphDonaComponent
+		GraphDonaComponent,
+		AccountSettingsComponent
 	],
 	imports: [
 		SharedModule,
