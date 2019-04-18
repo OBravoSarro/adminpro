@@ -4,7 +4,7 @@ import { PAGES_ROUTES } from './pages.routes';
 import { SharedModule } from '../shared/shared.module';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PagesComponent } from './pages.component';
 
@@ -19,6 +19,9 @@ import { GraphDonaComponent } from '../components/graph-dona/graph-dona.componen
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { ProfileComponent } from './profile/profile.component';
+
 
 @NgModule({
 	declarations: [
@@ -30,14 +33,17 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 		GraphDonaComponent,
 		AccountSettingsComponent,
 		PromisesComponent,
-		RxjsComponent
+		RxjsComponent,
+		ProfileComponent
 	],
 	imports: [
 		SharedModule,
 		PAGES_ROUTES,
 		FormsModule,
+		ReactiveFormsModule,
 		BrowserModule,
-		ChartsModule
+		ChartsModule,
+		PipesModule
 	],
 	exports: [
 		DashboardComponent,

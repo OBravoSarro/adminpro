@@ -13,7 +13,8 @@ import * as fromServices from './service.index';
     fromServices.SettingsService,
     fromServices.SharedService,
     fromServices.SidebarService,
-    fromServices.UserService
+    fromServices.UserService,
+    fromServices.UploadFileService
   ]
 })
 export class ServiceModule { }

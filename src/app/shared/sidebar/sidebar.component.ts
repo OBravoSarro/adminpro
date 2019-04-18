@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarService, UserService } from '../../services/service.index';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { UserDataInfo } from '../../models/user.model';
 
 @Component({
 	selector: 'app-sidebar',
@@ -9,12 +10,16 @@ import { Router } from '@angular/router';
 	styles: []
 })
 export class SidebarComponent implements OnInit {
-
+	user: any;
 	constructor(
 		public sidebarService:SidebarService,
 		private _user: UserService,
 		private _router: Router
-	) { }
+	) {
+		this.user = (): UserDataInfo => {
+            return this._user.getUserInfo();
+        }
+	}
 
 	logout() {
 		Swal.fire({
