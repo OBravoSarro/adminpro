@@ -15,7 +15,6 @@ export class ImagePipe implements PipeTransform {
       return img;
     }
     const result = `${url}${params.type}/${img}`;
-    console.log(result);
     return result;
   }
 

@@ -43,16 +43,7 @@
     <div class="card">
       <div class="card-body" align="center">
         <h4 class="card-title">User picture</h4>
-        <img class="w150" [src]="(!imgTemp) ? (user.img | image: {type: 'user'}) : imgTemp" alt="user">
-        <input name="file" (change)="picturSelected($event.target.files[0])" type="file" #inputUploadFile [hidden]="true" />
-        <br /><br />
-        <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10" (click)="actionUpload()">
-          <i class="fa fa-cloud-upload"></i> Upload picture
-        </button>
-        <br /><br />
-        <button type="submit" [disabled]="!userPicture" (click)="updatePicture()" class="btn btn-block btn-success waves-effect waves-light m-r-10">
-          <i class="fa fa-save"></i> Save
-        </button>
+        <app-upload-picture [image]="user.img" [typeImage]="'user'" (updatePictureEv)="updatePicture($event)"></app-upload-picture>
       </div>
     </div>
   </div>

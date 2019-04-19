@@ -14,9 +14,6 @@ export class ProfileComponent implements OnInit {
   form: FormGroup;
   user: UserDataInfo;
   isInvalidForm: boolean;
-  userPicture: File;
-  imgTemp: string | ArrayBuffer;
-  @ViewChild('inputUploadFile') inputUploadFile:ElementRef;
 
   constructor(private _user: UserService) { }
 
@@ -43,27 +40,8 @@ export class ProfileComponent implements OnInit {
     this._user.updateUser( user ).subscribe();
   }
 
-  actionUpload () {
-    this.inputUploadFile.nativeElement.click();
-  }
-
-  picturSelected (picture: File) {
-    if (!picture || picture.type.indexOf('image') < 0) {
-      Swal.fire({
-        title: "File error",
-        text: `Invalid image`,
-        type: "error"
-      });
-      return;
-    }
-    let reader = new FileReader();
-    reader.readAsDataURL(picture);
-    reader.onloadend = () => this.imgTemp = reader.result;
-    this.userPicture = picture;
-  }
-
-  updatePicture () {
-    this._user.updateUserPicture(this.userPicture);
+  updatePicture (picture) {
+    this._user.updateUserPicture(picture);
   }
 
   ngOnInit() {

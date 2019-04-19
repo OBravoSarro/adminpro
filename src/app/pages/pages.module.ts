@@ -21,6 +21,10 @@ import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile/profile.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { HospitalListComponent } from './hospital-list/hospital-list.component';
+import { DoctorListComponent } from './doctor-list/doctor-list.component';
+import { UploadPictureComponent } from '../components/upload-picture/upload-picture.component';
 
 
 @NgModule({
@@ -31,10 +35,14 @@ import { ProfileComponent } from './profile/profile.component';
 		Graph1Component,
 		IncreaserComponent,
 		GraphDonaComponent,
+		UploadPictureComponent,
 		AccountSettingsComponent,
 		PromisesComponent,
 		RxjsComponent,
-		ProfileComponent
+		ProfileComponent,
+		UserListComponent,
+		HospitalListComponent,
+		DoctorListComponent
 	],
 	imports: [
 		SharedModule,
@@ -48,7 +56,8 @@ import { ProfileComponent } from './profile/profile.component';
 	exports: [
 		DashboardComponent,
 		ProgressComponent,
-		Graph1Component
+		Graph1Component,
+		UploadPictureComponent
 	]
 })
 export class PagesModule { }

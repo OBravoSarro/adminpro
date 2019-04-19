@@ -1,11 +1,16 @@
 import { Injectable } from "@angular/core";
-import { User, UserLogin, UserData, UserDataInfo } from "../../models/user.model";
+import {
+    User,
+    UserLogin,
+    UserData,
+    UserDataInfo
+} from "../../models/user.model";
 import { HttpClient } from "@angular/common/http";
-import { URL_SERVICES } from "../../config/config";
+import { URL_SERVICES, PAGINATE_SIZE } from "../../config/config";
 import { map } from "rxjs/operators";
 import Swal from "sweetalert2";
 import { Observable } from "rxjs";
-import { UploadFileService } from '../upload-file/upload-file.service';
+import { UploadFileService } from "../upload-file/upload-file.service";
 
 @Injectable({
     providedIn: "root"
@@ -42,11 +47,11 @@ export class UserService {
             userData["remember"] = true;
         }
         localStorage.setItem("admpUsInf", JSON.stringify(userData));
-	}
+    }
 
-	public getUserInfo ():UserDataInfo {
-		return this.user.user;
-	}
+    public getUserInfo(): UserDataInfo {
+        return this.user.user;
+    }
 
     public createUser(user: User): Observable<User> {
         const url = URL_SERVICES + "/user";
@@ -54,7 +59,9 @@ export class UserService {
             map((resp: any) => {
                 Swal.fire({
                     title: "Created user",
-                    text: `The user ${resp.data.email} has been created successfully`,
+                    text: `The user ${
+                        resp.data.email
+                    } has been created successfully`,
                     type: "success"
                 });
                 return resp.data;
@@ -63,15 +70,22 @@ export class UserService {
     }
 
     public updateUser(user): Observable<User> {
-        const url = `${URL_SERVICES}/user/${this.user.id}?token=${this.user.token}`;
-        user.role = this.user.user.role;
+        const userId = user.hasOwnProperty('_id') ? user._id : this.user.id;
+        const url = `${URL_SERVICES}/user/${userId}?token=${
+            this.user.token
+        }`;
+        user.role = user.hasOwnProperty('role') ? user.role : this.user.user.role;
         return this.http.put(url, user).pipe(
             map((resp: any) => {
-                this.user.user = resp.user;
-                this.saveStorageUser(this.user, this.user.remember);
+                if(this.user.id === resp.user._id){
+                    this.user.user = resp.user;
+                    this.saveStorageUser(this.user, this.user.remember);
+                }
                 Swal.fire({
                     title: "Edited user",
-                    text: `The user ${resp.user.email} has been edited successfully`,
+                    text: `The user ${
+                        resp.user.email
+                    } has been edited successfully`,
                     type: "success"
                 });
                 return resp.data;
@@ -79,22 +93,31 @@ export class UserService {
         );
     }
 
-    public updateUserPicture(file: File) {
-        this._uploadFileService
-            .uploadFile(file, "users", this.user.id)
-            .then((resp) => {
-				this.user.user = resp['data'];
-                this.saveStorageUser(this.user, this.user.remember);
-                Swal.fire({
-                    title: "Picture upload successfully",
-                    text: `The user image has been updated`,
-                    type: "success"
+    public updateUserPicture(file: File, user?: UserDataInfo) {
+        return new Promise ((resolve, reject) => {
+
+
+            const userId = (user) ? user._id : this.user.id;
+            this._uploadFileService
+                .uploadFile(file, "users", userId)
+                .then(resp => {
+                    if (!user){
+                        this.user.user = resp["data"];
+                        this.saveStorageUser(this.user, this.user.remember);
+                    }
+                    Swal.fire({
+                        title: "Picture upload successfully",
+                        text: `The user image has been updated`,
+                        type: "success"
+                    });
+                    resolve(resp);
+
+                })
+                .catch(data => {
+                    reject(data);
                 });
-            })
-            .catch((data) => {
-				console.log(data);
-				return (data);
-			});
+
+        });
     }
 
     public loginUser(user: UserLogin): Observable<boolean> {
@@ -136,5 +159,41 @@ export class UserService {
             }
         }
         localStorage.removeItem("admpUsInf");
+    }
+
+    public getUsers(
+        from: number = 0
+    ): Observable<{ users: UserDataInfo[]; total: number }> {
+        const url = URL_SERVICES + `/user?from=${from}&size=${PAGINATE_SIZE}`;
+        return this.http.get(url).pipe(
+            map((resp: any) => {
+                return {
+                    users: resp.users,
+                    total: resp.total
+                };
+            })
+        );
+    }
+
+    public searchUser(text: string): Observable<UserDataInfo[]> {
+        const url = URL_SERVICES + `/search/users/?search=${text}`;
+        return this.http.get(url).pipe(
+            map((resp: any) => {
+                return resp.data;
+            })
+        );
+    }
+    public deleteUser(user: UserDataInfo): Observable<UserDataInfo> {
+        const url = `${URL_SERVICES}/user/${user._id}?token=${this.user.token}`;
+        return this.http.delete(url).pipe(
+            map((resp: any) => {
+                Swal.fire({
+                    title: "Delted user",
+                    text: `The user ${user.email} has been deleted successfully`,
+                    type: "success"
+                });
+                return resp.data;
+            })
+        );
     }
 }
