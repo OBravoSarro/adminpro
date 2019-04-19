@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { HospitalListComponent } from './hospital-list/hospital-list.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
+import { DoctorComponent } from './doctor/doctor.component';
 
 const pagesRoutes: Routes = [
 	{
@@ -29,6 +30,7 @@ const pagesRoutes: Routes = [
 			{ path: 'users', component: UserListComponent, data:{title:'Users'}},
 			{ path: 'hospitals', component: HospitalListComponent, data:{title:'Hospitals'}},
 			{ path: 'doctors', component: DoctorListComponent, data:{title:'Doctors'}},
+			{ path: 'doctors/:id', component: DoctorComponent, data:{title:'Doctor'}},
 			{ path: '', redirectTo: '/dashboard', pathMatch: 'full'}
 		]
 	}

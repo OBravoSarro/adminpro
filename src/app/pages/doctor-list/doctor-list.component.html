@@ -1,3 +1,66 @@
-<p>
-  doctor-list works!
-</p>
+<div class="row animated fadeI">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="searchForm">
+            <input #input formControlName="searchDoctorTxt" type="text" class="form-control" placeholder="Search doctor"/>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row animated fadeIn" *ngIf="loading">
+    <div class="col-sm-12">
+      <div class="alert alert-warning text-center">
+        <strong>Loading</strong>
+        <br/>
+        <i class="fa fa-refresh fa-spin fs-2x"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="row animated fadeI" *ngIf="!loading">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between">
+            <h3 class="card-title">
+              Doctors (<small>{{total}}</small>)
+            </h3>
+            <button type="button" class="btn btn-info" [routerLink]="['/doctors', 'new']">
+              <i class="fa fa-plus-circle"></i> New doctor
+            </button>
+          </div>
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Picture</th>
+                <th>Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doctor of doctors">
+                <td class="align-middle">
+                  <img class="w50" [src]="doctor.img | image: {type: 'doctor'}">
+                </td>
+                <td class="align-middle">{{doctor.name}}</td>
+                <td class="text-left align-middle">
+                  <button class="btn cm-mgr btn-info" [routerLink]="['/doctors', doctor._id]"><i class="fa fa-edit"></i></button>
+                  <button class="btn cm-mgr btn-danger" (click)="deleteDoctor(doctor)"><i class="fa fa-trash-o"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button class="btn cm-mgr btn-light" [disabled]="from == 0" (click)="pagination('prev')">Previous</button>
+          {{from+1}} / {{totalPages}}
+          <button class="btn cm-mgl btn-light" [disabled]="!next" (click)="pagination('next')">Next</button>
+
+        </div>
+      </div>
+    </div>
+  </div>

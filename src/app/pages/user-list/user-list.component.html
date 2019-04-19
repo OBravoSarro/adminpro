@@ -45,17 +45,17 @@
               </td>
               <td>{{user.email}}</td>
               <td>{{user.name}} {{user.lastname}}</td>
-              <td>
+              <td class="align-middle">
                 <select [(ngModel)]="user.role" name="role" class="form-control">
                   <option value="ADMIN_ROLE">ADMIN_ROLE</option>
                   <option value="USER_ROLE">USER_ROLE</option>
                 </select>
               </td>
-              <td class="text-center">
+              <td class="text-center align-middle">
                 <i class="mdi mdi-email" [hidden]="user.google"></i>
                 <i class="fa fa-google-plus" [hidden]="!user.google"></i>
               </td>
-              <td class="text-left">
+              <td class="text-left align-middle">
                 <button class="btn cm-mgr btn-info" (click)="updateUser(user)"><i class="fa fa-save"></i></button>
                 <button class="btn cm-mgr btn-danger" *ngIf="!isMyUser(user._id)" (click)="deleteUser(user)"><i class="fa fa-trash-o"></i></button>
               </td>

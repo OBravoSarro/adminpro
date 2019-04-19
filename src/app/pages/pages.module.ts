@@ -25,6 +25,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { HospitalListComponent } from './hospital-list/hospital-list.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
 import { UploadPictureComponent } from '../components/upload-picture/upload-picture.component';
+import { DoctorComponent } from './doctor/doctor.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { UploadPictureComponent } from '../components/upload-picture/upload-pict
 		ProfileComponent,
 		UserListComponent,
 		HospitalListComponent,
-		DoctorListComponent
+		DoctorListComponent,
+		DoctorComponent
 	],
 	imports: [
 		SharedModule,

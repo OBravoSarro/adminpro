@@ -14,7 +14,9 @@ import * as fromServices from './service.index';
     fromServices.SharedService,
     fromServices.SidebarService,
     fromServices.UserService,
-    fromServices.UploadFileService
+    fromServices.UploadFileService,
+    fromServices.HospitalService,
+    fromServices.DoctorService
   ]
 })
 export class ServiceModule { }

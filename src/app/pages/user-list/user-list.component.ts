@@ -36,17 +36,20 @@ export class UserListComponent implements OnInit {
 
   private getUsers() {
     this.loading = true;
-    this._user.getUsers(this.from).subscribe(usersData => {
-      this.users = [...usersData.users];
-      this.total = usersData.total;
-      this.totalPages = Math.ceil(usersData.total / PAGINATE_SIZE);
-      this.next = this.from < this.totalPages;
-      if((this.from + 1) > this.totalPages){
-        this.from = (this.totalPages - 1);
-        this.getUsers();
-      }
-      this.loading = false;
-    });
+    this._user.getUsers(this.from).subscribe(
+      usersData => {
+        this.users = [...usersData.users];
+        this.total = usersData.total;
+        this.totalPages = Math.ceil(usersData.total / PAGINATE_SIZE);
+        this.next = this.from < (this.totalPages - 1);
+        if((this.from + 1) > this.totalPages){
+          this.from = (this.totalPages - 1);
+          this.getUsers();
+        }
+        this.loading = false;
+      },
+      () => this.loading = false
+    );
   }
 
   pagination (type: string) {
@@ -106,7 +109,10 @@ export class UserListComponent implements OnInit {
 
   updateUser (user: UserDataInfo) {
     this.loading = true;
-    this._user.updateUser(user).subscribe(() => this.loading = false);
+    this._user.updateUser(user).subscribe(
+      () => this.loading = false,
+      () => this.loading = false
+    );
   }
 
   savePicture (picture: File) {
