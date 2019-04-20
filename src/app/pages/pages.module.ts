@@ -3,10 +3,7 @@ import { PAGES_ROUTES } from './pages.routes';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { PagesComponent } from './pages.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -24,20 +21,18 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { HospitalListComponent } from './hospital-list/hospital-list.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
-import { UploadPictureComponent } from '../components/upload-picture/upload-picture.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { SearchComponent } from './search/search.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
 	declarations: [
-		PagesComponent,
 		DashboardComponent,
 		ProgressComponent,
 		Graph1Component,
 		IncreaserComponent,
 		GraphDonaComponent,
-		UploadPictureComponent,
 		AccountSettingsComponent,
 		PromisesComponent,
 		RxjsComponent,
@@ -53,15 +48,14 @@ import { SearchComponent } from './search/search.component';
 		PAGES_ROUTES,
 		FormsModule,
 		ReactiveFormsModule,
-		BrowserModule,
+		CommonModule,
 		ChartsModule,
 		PipesModule
 	],
 	exports: [
 		DashboardComponent,
 		ProgressComponent,
-		Graph1Component,
-		UploadPictureComponent
+		Graph1Component
 	]
 })
 export class PagesModule { }

@@ -8,6 +8,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './footer/footer.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { UploadPictureComponent } from '../components/upload-picture/upload-picture.component';
 
 @NgModule({
 	declarations: [
@@ -15,7 +16,8 @@ import { PipesModule } from '../pipes/pipes.module';
 		HeaderComponent,
 		SidebarComponent,
 		BreadcrumbsComponent,
-		FooterComponent
+		FooterComponent,
+		UploadPictureComponent
 	],
 	imports: [
 		RouterModule,
@@ -27,7 +29,8 @@ import { PipesModule } from '../pipes/pipes.module';
 		HeaderComponent,
 		SidebarComponent,
 		BreadcrumbsComponent,
-		FooterComponent
+		FooterComponent,
+		UploadPictureComponent
 	]
 })
 export class SharedModule { }
