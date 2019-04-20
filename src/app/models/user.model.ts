@@ -1,3 +1,5 @@
+import { Menu } from './menu.model';
+
 export class User {
     constructor(
         public name: string,
@@ -24,7 +26,8 @@ export class UserData {
         public id: string,
         public token: string,
         public user: UserDataInfo,
-        public remember?: boolean
+        public remember?: boolean,
+        public menu?: Menu[]
     ){}
 }
 export class UserDataInfo {

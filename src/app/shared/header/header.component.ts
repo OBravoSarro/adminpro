@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from "../../services/service.index";
 import { Router } from "@angular/router";
 import Swal from "sweetalert2";
@@ -10,13 +10,14 @@ import { UserDataInfo } from '../../models/user.model';
     styles: []
 })
 export class HeaderComponent implements OnInit {
-    user: any;
-
-    constructor(private _user: UserService, private _router: Router) {
-        this.user = (): UserDataInfo => {
-            return this._user.getUserInfo();
-        }
+    user = (): UserDataInfo => {
+        return this._user.getUserInfo();
     }
+
+    @ViewChild('close') close: ElementRef;
+    @ViewChild('input') input: ElementRef;
+
+    constructor(private _user: UserService, private router: Router) {}
 
     logout() {
         Swal.fire({
@@ -30,9 +31,15 @@ export class HeaderComponent implements OnInit {
         }).then(result => {
             if (result.value) {
                 this._user.logOutUser();
-                this._router.navigate(["/login"]);
+                this.router.navigate(["/login"]);
             }
         });
+    }
+
+    search (terms: string) {
+        this.router.navigate(["/search", terms]);
+        this.close.nativeElement.click();
+        this.input.nativeElement.value = '';
     }
 
     ngOnInit() {}

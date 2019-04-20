@@ -13,6 +13,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { HospitalListComponent } from './hospital-list/hospital-list.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { SearchComponent } from './search/search.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 const pagesRoutes: Routes = [
 	{
@@ -27,10 +29,11 @@ const pagesRoutes: Routes = [
 			{ path: 'rxjs', component: RxjsComponent, data:{title:'Rxjs'}},
 			{ path: 'account-settings', component: AccountSettingsComponent, data:{title:'Account settings'}},
 			{ path: 'profile', component: ProfileComponent, data:{title:'User profile'}},
-			{ path: 'users', component: UserListComponent, data:{title:'Users'}},
+			{ path: 'users', component: UserListComponent, data:{title:'Users'}, canActivate:[AdminGuard]},
 			{ path: 'hospitals', component: HospitalListComponent, data:{title:'Hospitals'}},
 			{ path: 'doctors', component: DoctorListComponent, data:{title:'Doctors'}},
 			{ path: 'doctors/:id', component: DoctorComponent, data:{title:'Doctor'}},
+			{ path: 'search/:terms', component: SearchComponent, data:{title:'Search'}},
 			{ path: '', redirectTo: '/dashboard', pathMatch: 'full'}
 		]
 	}

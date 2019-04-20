@@ -16,7 +16,8 @@ import * as fromServices from './service.index';
     fromServices.UserService,
     fromServices.UploadFileService,
     fromServices.HospitalService,
-    fromServices.DoctorService
+    fromServices.DoctorService,
+    fromServices.SearchService
   ]
 })
 export class ServiceModule { }

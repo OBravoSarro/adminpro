@@ -7,10 +7,11 @@ import {
 } from "../../models/user.model";
 import { HttpClient } from "@angular/common/http";
 import { URL_SERVICES, PAGINATE_SIZE } from "../../config/config";
-import { map } from "rxjs/operators";
+import { map, catchError } from 'rxjs/operators';
 import Swal from "sweetalert2";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { UploadFileService } from "../upload-file/upload-file.service";
+import { SidebarService } from '../shared/sidebar.service';
 
 @Injectable({
     providedIn: "root"
@@ -20,7 +21,8 @@ export class UserService {
 
     constructor(
         public http: HttpClient,
-        private _uploadFileService: UploadFileService
+        private _uploadFileService: UploadFileService,
+        private _sidebar: SidebarService
     ) {
         this.setUser();
     }
@@ -28,10 +30,12 @@ export class UserService {
     private setUser(user?: UserData) {
         if (user) {
             this.user = user;
+            this._sidebar.setMenu(user.menu);
             return;
         }
         if (localStorage.getItem("admpUsInf")) {
             this.user = JSON.parse(localStorage.getItem("admpUsInf"));
+            this._sidebar.setMenu(this.user.menu);
         }
     }
 
@@ -39,7 +43,8 @@ export class UserService {
         let userData = {
             id: resp.id,
             token: resp.token,
-            user: resp.user
+            user: resp.user,
+            menu: resp.menu
         };
         this.setUser(userData);
         userData["remember"] = false;
@@ -65,6 +70,14 @@ export class UserService {
                     type: "success"
                 });
                 return resp.data;
+            }),
+            catchError(err => {
+                Swal.fire({
+                    title: "Error",
+                    text: `${err.error.message}`,
+                    type: "error"
+                });
+                return of(false);
             })
         );
     }
@@ -89,6 +102,14 @@ export class UserService {
                     type: "success"
                 });
                 return resp.data;
+            }),
+            catchError(err => {
+                Swal.fire({
+                    title: "Error",
+                    text: `${err.error.message}`,
+                    type: "error"
+                });
+                return of(false);
             })
         );
     }
@@ -126,6 +147,14 @@ export class UserService {
             map((resp: UserData) => {
                 this.saveStorageUser(resp, user.remember);
                 return true;
+            }),
+            catchError(err => {
+                Swal.fire({
+                    title: "Error",
+                    text: `${err.error.message}`,
+                    type: "error"
+                });
+                return of(false);
             })
         );
     }
@@ -136,6 +165,14 @@ export class UserService {
             map((resp: UserData) => {
                 this.saveStorageUser(resp, false);
                 return true;
+            }),
+            catchError(err => {
+                Swal.fire({
+                    title: "Error",
+                    text: `${err.error.message}`,
+                    type: "error"
+                });
+                return of(false);
             })
         );
     }

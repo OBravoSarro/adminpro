@@ -1,0 +1,103 @@
+<div class="row animated fadeI" *ngIf="resultSearch">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+				<h3 class="card-title">
+					<a [routerLink]="['/users']">Users (<small>{{resultSearch.users.length}}</small>) <i class="fa fa-angle-right"></i></a>
+				</h3>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Picture</th>
+							<th>Email</th>
+							<th>Name</th>
+							<th>Role</th>
+							<th class="text-center">Auth</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let user of resultSearch.users">
+							<td>
+								<img class="w50 pointer-cm" [src]="user.img | image: {type: 'user'}">
+							</td>
+							<td>{{user.email}}</td>
+							<td>{{user.name}} {{user.lastname}}</td>
+							<td class="align-middle">
+								<select [(ngModel)]="user.role" name="role" class="form-control">
+									<option value="ADMIN_ROLE">ADMIN_ROLE</option>
+									<option value="USER_ROLE">USER_ROLE</option>
+								</select>
+							</td>
+							<td class="text-center align-middle">
+								<i class="mdi mdi-email" [hidden]="user.google"></i>
+								<i class="fa fa-google-plus" [hidden]="!user.google"></i>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row animated fadeI" *ngIf="resultSearch">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+				<h3 class="card-title">
+					<a [routerLink]="['/hospitals']">Hospitals (<small>{{resultSearch.hospitals.length}}</small>) <i class="fa fa-angle-right"></i></a>
+				</h3>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Picture</th>
+							<th>Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let hospital of resultSearch.hospitals">
+							<td class="align-middle">
+								<img class="w50 pointer-cm" [src]="hospital.img | image: {type: 'hospital'}">
+							</td>
+							<td class="align-middle">{{hospital.name}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row animated fadeI" *ngIf="resultSearch">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+				<h3 class="card-title">
+						<a [routerLink]="['/doctors']">Doctors (<small>{{resultSearch.doctors.length}}</small>) <i class="fa fa-angle-right"></i></a>
+				</h3>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Picture</th>
+							<th>Name</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let doctor of resultSearch.doctors">
+							<td class="align-middle">
+								<img class="w50 pointer-cm" [src]="doctor.img | image: {type: 'doctor'}">
+							</td>
+							<td class="align-middle">{{doctor.name}}</td>
+							<td class="align-middle">
+								<button class="btn cm-mgr btn-light" [routerLink]="['/doctors', doctor._id]" >
+									<i class="fa fa-angle-right"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

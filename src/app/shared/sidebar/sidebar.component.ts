@@ -10,16 +10,14 @@ import { UserDataInfo } from '../../models/user.model';
 	styles: []
 })
 export class SidebarComponent implements OnInit {
-	user: any;
+	user = (): UserDataInfo => {
+		return this._user.getUserInfo();
+	}
 	constructor(
 		public sidebarService:SidebarService,
 		private _user: UserService,
 		private _router: Router
-	) {
-		this.user = (): UserDataInfo => {
-            return this._user.getUserInfo();
-        }
-	}
+	) { }
 
 	logout() {
 		Swal.fire({
